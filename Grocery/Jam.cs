@@ -22,9 +22,9 @@ namespace Grocery
         public override void printInfo()
         {
             Console.WriteLine("Name: " + getName());
-            Console.WriteLine("Price: " + getPrice());
-            Console.WriteLine("Quantity: " + getQuantity());
-            Console.WriteLine("Type: " + type);
+            Console.WriteLine("\tPrice: " + getPrice());
+            Console.WriteLine("\tQuantity: " + getQuantity());
+            Console.WriteLine("\tType: " + type);
         }
 
         public override int Restock(int q)

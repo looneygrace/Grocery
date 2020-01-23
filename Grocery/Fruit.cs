@@ -46,10 +46,10 @@ namespace Grocery
         public override void printInfo()
         {
             Console.WriteLine("Name: " + getName());
-            Console.WriteLine("Price: " + getPrice());
-            Console.WriteLine("Quantity: " + getQuantity());
-            Console.WriteLine("Condition: " + condition);
-            Console.WriteLine("Origin: " + origin);
+            Console.WriteLine("\tPrice: " + getPrice());
+            Console.WriteLine("\tQuantity: " + getQuantity());
+            Console.WriteLine("\tCondition: " + condition);
+            Console.WriteLine("\tOrigin: " + origin);
         }
 
         public void updateConditon(int c)

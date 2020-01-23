@@ -12,8 +12,8 @@ namespace Grocery
             List<Book> books = new List<Book>();
             List<Jam> jams = new List<Jam>();
 
-            int choice = -1;
-            while (choice != 0)
+            int choice = 0;
+            while (choice != -1)
             {
                 choice = PrintMenu();
                 
@@ -21,9 +21,10 @@ namespace Grocery
                 Console.WriteLine("1. Book");
                 Console.WriteLine("2. Fruit");
                 Console.WriteLine("3. Jam");
-                Console.WriteLine("any other character to exit");
+                Console.WriteLine("0 to exit");
+
                 char itemClass = Convert.ToChar(Console.ReadLine());
-                Console.WriteLine("ITEM CLASS     " + itemClass);
+
                 if (itemClass == '1')
                 {
                     runBook(books, choice);
@@ -32,11 +33,18 @@ namespace Grocery
                 {
                     runFruit(fruits, choice);
                 }
-                else if (itemClass == 3)
+                else if (itemClass == '3')
                 {
                     runJam(jams, choice);
                 }
-                Console.WriteLine("Hello World!");
+                else if(itemClass =='0')
+                {
+                    choice = -1;
+                }
+                else
+                {
+                    Console.WriteLine("INVALID CHOICE");
+                }
             }
         }
 
@@ -48,9 +56,10 @@ namespace Grocery
             Console.WriteLine("2. Restock an item");
             Console.WriteLine("3. Sell an Item");
             Console.WriteLine("4. Info");
+            Console.WriteLine("5. PRINT ALL info");
             choice = Convert.ToInt32(Console.ReadLine());
 
-            if (choice >=  1 && choice <= 4)
+            if (choice >=  1 && choice <= 5)
             {
                 return choice; 
             }
@@ -147,7 +156,15 @@ namespace Grocery
                         b[index].printInfo();
                     }
             }
-
+            else if(choice == 5)
+            {
+                int i = 0;
+                while (i < b.Count)
+                {
+                    b[i].printInfo();
+                    i++;
+                }
+            }
         }
         public static int findBook(List<Book> books, string name)
         {
@@ -268,6 +285,17 @@ namespace Grocery
                     f[index].printInfo();
                 }
             }
+
+            else if (choice == 5)
+            {
+                int i = 0;
+                Console.WriteLine(f.Count);
+                while (i < f.Count)
+                {
+                    f[i].printInfo();
+                    i++;
+                }
+            }
         }
 
         public static int findFruit(List<Fruit> fruits, string name)
@@ -313,10 +341,12 @@ namespace Grocery
                 Console.WriteLine("Jam Price: ");
                 price = Convert.ToDouble(Console.ReadLine());
 
-                
+
                 Jam temp = new Jam(name, price, quantity, type);
                 j.Add(temp);
 
+                int index = findJams(j, name);
+                j[index].printInfo();
 
             }
             else if (choice == 2)
@@ -379,21 +409,35 @@ namespace Grocery
                 {
                     j[index].printInfo();
                 }
+
+            }
+            else if (choice == 5)
+            {
+                int i = 0;
+                while (i < j.Count)
+                {
+                    j[i].printInfo();
+                    i++;
+                }
             }
         }
+
         public static int findJams(List<Jam> jams, string name)
         {
             int index = 0;
             bool found = false;
             while (jams[index].getName() != name)
             {
-                index++;
                 if (jams[index].getName() == name)
                 {
                     found = true;
                 }
+                if (found != true)
+                {
+                    index++;
+                }
             }
-            if (found == true)
+            if (found == true || jams[index].getName() == name)
             {
                 return index;
             }
