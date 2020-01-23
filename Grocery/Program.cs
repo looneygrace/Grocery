@@ -160,25 +160,227 @@ namespace Grocery
             }
         }
 
-        private static void runFruit(Fruit f, int choice)
+        private static void runFruit(List<Fruit> f, int choice)
         {
+            string name, origin;
+            int quantity, rating;
+            double price;
             if (choice == 1)
             {
-                Console.ReadLine();
+
+                Console.WriteLine("Fruit Name: ");
+                name = Console.ReadLine();
+
+                Console.WriteLine("Fruit Origin (where is it from?) : ");
+                origin = Console.ReadLine();
+
+                Console.WriteLine("Fruit Quantity: ");
+                quantity = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Fruit Price: ");
+                price = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Fruit Condition (1(Rotten) - 5(not ripe): ");
+                rating = Convert.ToInt32(Console.ReadLine());
+                Fruit temp = new Fruit(name, price, quantity, origin, rating);
+                f.Add(temp);
+
+
             }
             else if (choice == 2)
             {
                 //restock
-                Grocery.Book<hey>
+                Console.WriteLine("Item to restock? ");
+                name = Console.ReadLine();
+                int index = findFruit(f, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior Restock: ");
+                    f[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    f[index].Restock(quantity);
+                    Console.WriteLine("After Restock: ");
+                    f[index].printInfo();
+
+                }
             }
+
             else if (choice == 3)
             {
                 //sell
+                Console.WriteLine("Item to sell? ");
+                name = Console.ReadLine();
+                int index = findFruit(f, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior sale: ");
+                    f[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    f[index].Sell(quantity);
+                    Console.WriteLine("After sale: ");
+                    f[index].printInfo();
+                }
             }
+
             else if (choice == 4)
             {
                 //print info
+                Console.WriteLine("Item name? ");
+                name = Console.ReadLine();
+                int index = findFruit(f, name);
+
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    f[index].printInfo();
+                }
             }
         }
+
+        public static int findFruit(List<Fruit> fruits, string name)
+        {
+            int index = 0;
+            bool found = false;
+            while (fruits[index].getName() != name)
+            {
+                index++;
+                if (fruits[index].getName() == name)
+                {
+                    found = true;
+                }
+            }
+            if (found == true)
+            {
+                return index;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private static void runJam(List<Jam> j, int choice)
+        {
+            string name, type;
+            int quantity;
+            double price;
+            if (choice == 1)
+            {
+
+                Console.WriteLine("Jam Name: ");
+                name = Console.ReadLine();
+
+                Console.WriteLine("Jam type (Jelly, Marmalade, Perserves?): ");
+                type = Console.ReadLine();
+
+                Console.WriteLine("Jam Quantity: ");
+                quantity = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Jam Price: ");
+                price = Convert.ToDouble(Console.ReadLine());
+
+                
+                Jam temp = new Jam(name, price, quantity, type);
+                j.Add(temp);
+
+
+            }
+            else if (choice == 2)
+            {
+                //restock
+                Console.WriteLine("Item to restock? ");
+                name = Console.ReadLine();
+                int index = findJams(j, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior Restock: ");
+                    j[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    j[index].Restock(quantity);
+                    Console.WriteLine("After Restock: ");
+                    j[index].printInfo();
+
+                }
+            }
+
+            else if (choice == 3)
+            {
+                //sell
+                Console.WriteLine("Item to sell? ");
+                name = Console.ReadLine();
+                int index = findJams(j, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior sale: ");
+                    j[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    j[index].Sell(quantity);
+                    Console.WriteLine("After sale: ");
+                    j[index].printInfo();
+                }
+            }
+
+            else if (choice == 4)
+            {
+                //print info
+                Console.WriteLine("Item name? ");
+                name = Console.ReadLine();
+                int index = findJams(j, name);
+
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    j[index].printInfo();
+                }
+            }
+        }
+        public static int findJams(List<Jam> jams, string name)
+        {
+            int index = 0;
+            bool found = false;
+            while (jams[index].getName() != name)
+            {
+                index++;
+                if (jams[index].getName() == name)
+                {
+                    found = true;
+                }
+            }
+            if (found == true)
+            {
+                return index;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
     }
 }

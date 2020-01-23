@@ -6,7 +6,7 @@ namespace Grocery
 {
     class Jam : Item
     {
-        List<Jam> jams;
+        
         
         private string type;
         
@@ -21,47 +21,37 @@ namespace Grocery
             jams.Add(this);
         }
 
-        public override void printInfo(string itemName)
+        public override void printInfo()
         {
-            int index = findItem(itemName);
-            Console.WriteLine("Name: " + jams[index].getName());
-            Console.WriteLine("Price: " + jams[index].getPrice());
-            Console.WriteLine("Quantity: " + jams[index].getQuantity());
-            Console.WriteLine("Type: " + jams[index].type);
+            Console.WriteLine("Name: " + getName());
+            Console.WriteLine("Price: " + getPrice());
+            Console.WriteLine("Quantity: " + getQuantity());
+            Console.WriteLine("Type: " + type);
         }
 
-        public override int Restock(string itemName, int q)
+        public override int Restock(int q)
         {
-            int index = findItem(itemName);
-            int newQuantity = q + jams[index].getQuantity();
-            jams[index].changeQuantity(newQuantity);
+            int newQuantity = q + getQuantity();
+            changeQuantity(newQuantity);
             return newQuantity;
         }
 
-        public override void Sell(string itemName, int q)
+        public override void Sell( int q)
         {
-            throw new NotImplementedException();
-        }
-        public int findItem(string name)
-        {
-            int index = 0;
-            bool found = false;
-            while (jams[index].getName() != name)
+            double cost = getPrice() * getQuantity();
+            if (q > getQuantity())//not enough
             {
-                index++;
-                if (jams[index].getName() == name)
-                {
-                    found = true;
-                }
+                Console.WriteLine("Not Enough of " + getName());
+                Console.WriteLine("We only have " + getQuantity() + ".");
+                Console.WriteLine("Selling you: " + getQuantity() + ".");
+                q = getQuantity();
             }
-            if (found == true)
-            {
-                return index;
-            }
-            else
-            {
-                return -1;
-            }
+            Restock(-1 * q);
+
+            //printing receipt
+            printReciept(getName(), q, cost);
+
         }
     }
+
 }

@@ -25,63 +25,43 @@ namespace Grocery
             books.Add(this);
         }
 
-        public override void Sell(int index, int q)
+        public override void Sell(int q)
         {
-            int index = findItem(itemName);
+            
             double cost = getPrice() * getQuantity();
             if (q > getQuantity())//not enough
             {
-                Console.WriteLine("Not Enough of " + books[index].getName());
-                Console.WriteLine("We only have " + books[index].getQuantity() + ".");
-                Console.WriteLine("Selling you: " + books[index].getQuantity() + ".");
-                q = books[index].getQuantity();
+                Console.WriteLine("Not Enough of " + getName());
+                Console.WriteLine("We only have " + getQuantity() + ".");
+                Console.WriteLine("Selling you: " + getQuantity() + ".");
+                q = getQuantity();
             }
-                Restock(itemName, -1 * q);
+                Restock(-1 * q);
             
             //printing receipt
             printReciept(getName(), q, cost);
 
         }
 
-        public override int Restock(string itemName, int q)
+        public override int Restock(int q)
         {
-            int index = findItem(itemName);
-            int newQuantity = q + books[index].getQuantity();
-            books[index].changeQuantity(newQuantity);
+            
+            int newQuantity = q + getQuantity();
+            changeQuantity(newQuantity);
             return newQuantity;
         }
 
-        public override void printInfo(string itemName)
+        public override void printInfo()
         {
-            int index = findItem(itemName);
-            Console.WriteLine("Name: " + books[index].getName());
-            Console.WriteLine("\tPrice: " + books[index].getPrice());
-            Console.WriteLine("\tQuantity: " + books[index].getQuantity());
-            Console.WriteLine("\tAuthor: " + books[index].author);
-            Console.WriteLine("\tRating: " + books[index].rating);
+            
+            Console.WriteLine("Name: " + getName());
+            Console.WriteLine("\tPrice: " + getPrice());
+            Console.WriteLine("\tQuantity: " + getQuantity());
+            Console.WriteLine("\tAuthor: " + author);
+            Console.WriteLine("\tRating: " + rating);
 
         }
 
-        public int findItem(List<Book> books, string name)
-        {
-            int index = 0;
-            bool found = false;
-            while (books[index].getName() != name)
-            {
-                index++;
-                if (books[index].getName() == name)
-                {
-                    found = true;
-                }
-            }
-            if (found == true)
-            {
-                return index;
-            }
-            else
-            {
-                return -1;
-            }
-        }
+        
     }
 }
