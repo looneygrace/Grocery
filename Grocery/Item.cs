@@ -66,6 +66,16 @@ namespace Grocery
         {
             return name;
         }
+
+        public static implicit operator Item(List<Fruit> v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator Item(List<Book> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }
