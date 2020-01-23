@@ -8,8 +8,9 @@ namespace Grocery
         
         static void Main(string[] args)
         {
-            Fruit f;
-            Book b; 
+            List<Fruit> fruits = new List<Fruit>();
+            List<Book> books = new List<Book>();
+            List<Jam> jams = new List<Jam>();
 
             int choice = PrintMenu();
             int itemClass = 0;
@@ -20,7 +21,7 @@ namespace Grocery
             Console.WriteLine("any other character to exit");
             if (itemClass == 1)
             {
-                runBook(b, choice);
+                runBook(books, choice);
             }
             else if (itemClass == 2)
             {

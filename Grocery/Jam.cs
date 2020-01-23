@@ -13,12 +13,10 @@ namespace Grocery
         public Jam() : base("NO", 0.00, -1)
         {
             type = "NO" ;
-            jams.Add(this);
         }
         public Jam(string n, double p, int q, string t) : base(n, p, q)
         {
             type = t;
-            jams.Add(this);
         }
 
         public override void printInfo()

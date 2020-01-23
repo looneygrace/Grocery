@@ -17,70 +17,46 @@ namespace Grocery
             condition = c;
             origin = o;
         }
-        public override void Sell(string itemName, int q)
+        public override void Sell(int q)
         {
-            int index = findItem(itemName);
-            double cost = fruits[index].getPrice() * fruits[index].getQuantity();
-            if (q > fruits[index].getQuantity())
+            double cost = getPrice() * getQuantity();
+            if (q > getQuantity())
             {
-                Console.WriteLine("Not Enough of " + fruits[index].getName());
-                Console.WriteLine("We only have " + fruits[index].getQuantity() + ".");
-                Console.WriteLine("Selling you: " + fruits[index].getQuantity() + ".");
-                Restock(itemName, q);
+                Console.WriteLine("Not Enough of " + getName());
+                Console.WriteLine("We only have " + getQuantity() + ".");
+                Console.WriteLine("Selling you: " + getQuantity() + ".");
+                Restock(q);
             }
             else
             {
-                Restock(itemName, -1 * q);
+                Restock(-1 * q);
             }
 
             //printing receipt
             printReciept(getName(), q, cost);
         }
 
-        public override int Restock(string itemName, int q)
+        public override int Restock(int q)
         {
-            int index = findItem(itemName);
-            int newQuantity = q + fruits[index].getQuantity();
-            fruits[index].changeQuantity(newQuantity);
+            int newQuantity = q + getQuantity();
+            changeQuantity(newQuantity);
             //might want to check if quantity is too big or too small(not enough in stock)
             return newQuantity;
         }
 
-        public override void printInfo(string itemName)
+        public override void printInfo()
         {
-            int index = findItem(itemName);
-            Console.WriteLine("Name: " + fruits[index].getName());
-            Console.WriteLine("Price: " + fruits[index].getPrice());
-            Console.WriteLine("Quantity: " + fruits[index].getQuantity());
-            Console.WriteLine("Expiration Date: " + fruits[index].expDate);
-            Console.WriteLine("Origin: " + fruits[index].origin);
+            Console.WriteLine("Name: " + getName());
+            Console.WriteLine("Price: " + getPrice());
+            Console.WriteLine("Quantity: " + getQuantity());
+            Console.WriteLine("Condition: " + condition);
+            Console.WriteLine("Origin: " + origin);
         }
 
-        public void updateConditon(string c)
+        public void updateConditon(int c)
         {
             //might need more
             condition = c;
-        }
-        public int findItem(string name)
-        {
-            int index = 0;
-            bool found = false;
-            while (fruits[index].getName() != name)
-            {
-                index++;
-                if (fruits[index].getName() == name)
-                {
-                    found = true;
-                }
-            }
-            if (found == true)
-            {
-                return index;
-            }
-            else
-            {
-                return -1;
-            }
         }
     }
 }

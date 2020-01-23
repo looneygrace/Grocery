@@ -22,7 +22,6 @@ namespace Grocery
         {
             rating = r;
             author = a;
-            books.Add(this);
         }
 
         public override void Sell(int q)
