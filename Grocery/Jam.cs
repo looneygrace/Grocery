@@ -20,18 +20,22 @@ namespace Grocery
             type = t;
             jams.Add(this);
         }
+
         public override void printInfo(string itemName)
         {
             int index = findItem(itemName);
             Console.WriteLine("Name: " + jams[index].getName());
             Console.WriteLine("Price: " + jams[index].getPrice());
             Console.WriteLine("Quantity: " + jams[index].getQuantity());
-
+            Console.WriteLine("Type: " + jams[index].type);
         }
 
         public override int Restock(string itemName, int q)
         {
-            throw new NotImplementedException();
+            int index = findItem(itemName);
+            int newQuantity = q + jams[index].getQuantity();
+            jams[index].changeQuantity(newQuantity);
+            return newQuantity;
         }
 
         public override void Sell(string itemName, int q)

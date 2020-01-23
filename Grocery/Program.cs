@@ -8,11 +8,8 @@ namespace Grocery
         
         static void Main(string[] args)
         {
-            List < Item > grocery = new List< Item > ();
-            List<Item
-            List<Fruit> fruits = new List<Fruit>();
-            List<Book> books = new List<Book>();
-            List<Jam> jams = new List<Jam>();
+            Fruit f;
+            Book b; 
 
             int choice = PrintMenu();
             int itemClass = 0;
@@ -23,7 +20,7 @@ namespace Grocery
             Console.WriteLine("any other character to exit");
             if (itemClass == 1)
             {
-                runBook(books, choice);
+                runBook(b, choice);
             }
             else if (itemClass == 2)
             {
@@ -54,25 +51,101 @@ namespace Grocery
         }
         private static void runBook(List<Book> b, int choice)
         {
-            if(choice == 1)
+            string name, author;
+            int quantity, rating;
+            double price;
+            if (choice == 1)
             {
-                b.
+
+                Console.WriteLine("Book Name: ");
+                name = Console.ReadLine();
+
+                Console.WriteLine("Book Author: ");
+                author = Console.ReadLine();
+
+                Console.WriteLine("Book Quantity: ");
+                quantity = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Book Price: ");
+                price = Convert.ToDouble(Console.ReadLine());
+
+                Console.WriteLine("Book Rating: ");
+                rating = Convert.ToInt32(Console.ReadLine());
+                Book temp = new Book(name, price, quantity, author, rating);
+                b.Add(temp);
+
+
             }
-            else if(choice == 2)
+            else if (choice == 2)
             {
                 //restock
-                Grocery.Book<hey> 
+                Console.WriteLine("Item to restock? ");
+                name = Console.ReadLine();
+                int index = findBook(b, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior Restock: ");
+                    b[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    b[index].Restock(quantity);
+                    Console.WriteLine("After Restock: ");
+                    b[index].printInfo();
+
+                }
             }
+
+            else if (choice == 3)
+            {
+                //sell
+                Console.WriteLine("Item to sell? ");
+                name = Console.ReadLine();
+                int index = findBook(b, name);
+                if (index == -1)
+                {
+                    Console.WriteLine("Item NOT FOUND");
+                }
+                else
+                {
+                    Console.WriteLine("Prior sale: ");
+                    b[index].printInfo();
+                    Console.WriteLine("Quantity? ");
+                    quantity = Convert.ToInt32(Console.ReadLine());
+                    b[index].Sell(quantity);
+                    Console.WriteLine("After sale: ");
+                    b[index].printInfo();
+                }
+            }
+
+            else if (choice == 4)
+            {
+                //print info
+                Console.WriteLine("Item name? ");
+                name = Console.ReadLine();
+                int index = findBook(b, name);
                 
+                if (index == -1)
+                    {
+                        Console.WriteLine("Item NOT FOUND");
+                    }
+                    else
+                    {
+                        b[index].printInfo();
+                    }
+            }
         }
-        public int findItem(type[] list, string name)
+        public static int findBook(List<Book> books, string name)
         {
             int index = 0;
             bool found = false;
-            while (list[index].name != name)
+            while (books[index].getName() != name)
             {
                 index++;
-                if (list[index].name == name)
+                if (books[index].getName() == name)
                 {
                     found = true;
                 }
@@ -84,6 +157,27 @@ namespace Grocery
             else
             {
                 return -1;
+            }
+        }
+
+        private static void runFruit(Fruit f, int choice)
+        {
+            if (choice == 1)
+            {
+                Console.ReadLine();
+            }
+            else if (choice == 2)
+            {
+                //restock
+                Grocery.Book<hey>
+            }
+            else if (choice == 3)
+            {
+                //sell
+            }
+            else if (choice == 4)
+            {
+                //print info
             }
         }
     }

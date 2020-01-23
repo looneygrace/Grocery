@@ -56,9 +56,10 @@ namespace Grocery
             Console.WriteLine("Origin: " + fruits[index].origin);
         }
 
-        public void updateConditon(string itemName)
+        public void updateConditon(string c)
         {
-
+            //might need more
+            condition = c;
         }
         public int findItem(string name)
         {

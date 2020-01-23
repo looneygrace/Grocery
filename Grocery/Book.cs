@@ -9,13 +9,13 @@ namespace Grocery
     {
         private string author;
         private int rating;
-        List<Book> books;
+        
 
         public Book():base("NO", 0.00, -1)
         {
             rating = -1;
             author = "NO AUTHOR";
-            books.Add(this);
+            
         }
 
         public Book(string n, double p, int q, string a, int r) : base(n, p, q)
@@ -25,11 +25,11 @@ namespace Grocery
             books.Add(this);
         }
 
-        public override void Sell(string itemName, int q)
+        public override void Sell(int index, int q)
         {
             int index = findItem(itemName);
-            double cost = books[index].getPrice() * books[index].getQuantity();
-            if (q > books[index].getQuantity())//not enough
+            double cost = getPrice() * getQuantity();
+            if (q > getQuantity())//not enough
             {
                 Console.WriteLine("Not Enough of " + books[index].getName());
                 Console.WriteLine("We only have " + books[index].getQuantity() + ".");
@@ -62,7 +62,7 @@ namespace Grocery
 
         }
 
-        public int findItem(string name)
+        public int findItem(List<Book> books, string name)
         {
             int index = 0;
             bool found = false;

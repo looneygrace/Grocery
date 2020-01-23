@@ -18,9 +18,9 @@ namespace Grocery
             quantity = q;
         }
 
-        public abstract void Sell(string itemName, int q);
-        public abstract int Restock(string itemName, int q);
-        public abstract void printInfo(string itemName);
+        public abstract void Sell(int q);
+        public abstract int Restock(int q);
+        public abstract void printInfo();
         
 
         public void printReciept(string name, int amount, double cost)
