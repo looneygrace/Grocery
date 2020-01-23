@@ -12,26 +12,32 @@ namespace Grocery
             List<Book> books = new List<Book>();
             List<Jam> jams = new List<Jam>();
 
-            int choice = PrintMenu();
-            int itemClass = 0;
-            Console.WriteLine("with what class: ");
-            Console.WriteLine("1. BOOK");
-            Console.WriteLine("2. Fruit");
-            Console.WriteLine("3. Jam");
-            Console.WriteLine("any other character to exit");
-            if (itemClass == 1)
+            int choice = -1;
+            while (choice != 0)
             {
-                runBook(books, choice);
+                choice = PrintMenu();
+                
+                Console.WriteLine("with what class: ");
+                Console.WriteLine("1. Book");
+                Console.WriteLine("2. Fruit");
+                Console.WriteLine("3. Jam");
+                Console.WriteLine("any other character to exit");
+                char itemClass = Convert.ToChar(Console.ReadLine());
+                Console.WriteLine("ITEM CLASS     " + itemClass);
+                if (itemClass == '1')
+                {
+                    runBook(books, choice);
+                }
+                else if (itemClass == '2')
+                {
+                    runFruit(fruits, choice);
+                }
+                else if (itemClass == 3)
+                {
+                    runJam(jams, choice);
+                }
+                Console.WriteLine("Hello World!");
             }
-            else if (itemClass == 2)
-            {
-                runFruit(fruits, choice);
-            }
-            else if (itemClass == 3)
-            {
-                runJam(jams, choice);
-            }
-            Console.WriteLine("Hello World!");
         }
 
         private static int PrintMenu()
@@ -42,7 +48,7 @@ namespace Grocery
             Console.WriteLine("2. Restock an item");
             Console.WriteLine("3. Sell an Item");
             Console.WriteLine("4. Info");
-            choice = Console.Read();
+            choice = Convert.ToInt32(Console.ReadLine());
 
             if (choice >=  1 && choice <= 4)
             {
@@ -50,6 +56,7 @@ namespace Grocery
             }
             else { return -1; }
         }
+
         private static void runBook(List<Book> b, int choice)
         {
             string name, author;
@@ -74,9 +81,11 @@ namespace Grocery
                 rating = Convert.ToInt32(Console.ReadLine());
                 Book temp = new Book(name, price, quantity, author, rating);
                 b.Add(temp);
-
-
+                int index = findBook(b, name);
+                b[index].printInfo();
+                
             }
+
             else if (choice == 2)
             {
                 //restock
@@ -138,20 +147,27 @@ namespace Grocery
                         b[index].printInfo();
                     }
             }
+
         }
         public static int findBook(List<Book> books, string name)
         {
             int index = 0;
             bool found = false;
+            Console.WriteLine(books[index].getName());
             while (books[index].getName() != name)
             {
-                index++;
+                
                 if (books[index].getName() == name)
                 {
                     found = true;
+                    Console.WriteLine("Found");
+                }
+                if (found != true)
+                {
+                    index++;
                 }
             }
-            if (found == true)
+            if (found == true || books[index].getName() == name)
             {
                 return index;
             }
@@ -166,7 +182,7 @@ namespace Grocery
             string name, origin;
             int quantity, rating;
             double price;
-            if (choice == 1)
+            if (choice == 1) 
             {
 
                 Console.WriteLine("Fruit Name: ");
@@ -186,8 +202,11 @@ namespace Grocery
                 Fruit temp = new Fruit(name, price, quantity, origin, rating);
                 f.Add(temp);
 
+                int index = findFruit(f, name);
+                f[index].printInfo();
 
             }
+
             else if (choice == 2)
             {
                 //restock
@@ -257,13 +276,14 @@ namespace Grocery
             bool found = false;
             while (fruits[index].getName() != name)
             {
-                index++;
+                
                 if (fruits[index].getName() == name)
                 {
                     found = true;
                 }
+                index++;
             }
-            if (found == true)
+            if (found == true || fruits[index].getName() == name)
             {
                 return index;
             }

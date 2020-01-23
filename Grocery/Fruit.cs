@@ -11,7 +11,6 @@ namespace Grocery
         private int condition; //Condition(1-> Rotten, 5-> not ripe
         private string origin;
 
-        List<Fruit> fruits;
         public Fruit(string n, double p, int q, string o, int c) : base(n,p,q) {
             
             condition = c;
