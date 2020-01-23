@@ -18,30 +18,10 @@ namespace Grocery
             quantity = q;
         }
 
-        public abstract void Sell(Item[] list, string itemName, int q);
-        public abstract int Restock(Item[] list, string itemName, int q);
+        public abstract void Sell(string itemName, int q);
+        public abstract int Restock(string itemName, int q);
         public abstract void printInfo(string itemName);
-        public int findItem(Item[] list, string name)
-        {
-            int index = 0;
-            bool found = false;
-            while(list[index].Name != name)
-            {
-                index++;
-                if (list[index].Name == name)
-                {
-                    found = true;
-                }
-            }
-            if(found == true)
-            {
-                return index;
-            }
-            else
-            {
-                return -1;
-            }
-        }
+        
 
         public void printReciept(string name, int amount, double cost)
         {
@@ -67,15 +47,6 @@ namespace Grocery
             return name;
         }
 
-        public static implicit operator Item(List<Fruit> v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator Item(List<Book> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 }
