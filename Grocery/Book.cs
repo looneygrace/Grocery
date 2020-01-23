@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Grocery
+
 {
     class Book : Item
     {
         private string author;
         private int rating;
+        public Book():base("NO", 0.00, -1)
+        {
+            rating = -1;
+            author = "NO AUTHOR";
+        }
         public Book(string n, double p, int q, string a, int r) : base(n, p, q)
         {
             rating = r;
